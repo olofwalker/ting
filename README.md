@@ -1,7 +1,7 @@
-# Command-line driven project management in Scala 3
+# Command-line driven ticket management in Scala 3
 Ting is a small project I wrote to explore Scala 3 features in combination with GraalVM native image generation.
 
-I hope that this project can be helpful to anyone that wants to explore Scala 3.
+I hope that this project can be helpful to anyone that wants to explore Scala 3 and Graal AOT.
 
 ## Introduction
 
