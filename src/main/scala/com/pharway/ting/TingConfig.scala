@@ -28,7 +28,7 @@ case class Config(ticketEditor: String = "xdg-open")
 
 object ConfigFactory extends DefaultYamlProtocol 
 
-  implicit val f: YamlFormat[Config] = yamlFormat1(Config)
+  given f: YamlFormat[Config] = yamlFormat1(Config)
 
   final case class ConfigurationNotFound(message: String = "") extends Exception(message)
 

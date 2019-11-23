@@ -22,4 +22,3 @@ import Console._
 def (error: CommandError) logError: Unit = println(s"${RED}[Error]${RESET} ${error.msg}")
 def (error: String) logError: Unit = println(s"${RED}[Error]${RESET} ${error}")
 def (info: String) logInfo: Unit = println(info)
-def (info: List[String]) logInfo: Unit = println(info.mkString("\n"))
