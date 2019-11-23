@@ -1,2 +1,11 @@
 *.class
 *.log
+.bloop
+.metals
+.idea
+.vscode
+.ting
+.dotty*
+
+target
+project
