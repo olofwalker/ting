@@ -7,7 +7,7 @@ I hope that this project can be helpful to anyone that wants to explore Scala 3 
 
 Ting is a command-line driven, file-based, ticket management system. 
 
-A Ting project is initialized in the current folder by creating a base folder (`.ting`) and three sub-folders, one for each of the available ticket states.
+A Ting project is initialized in the current folder. It creates a base folder (`.ting`) and three sub-folders, one for each of the available ticket states.
 
  - When you add a new ticket, it's added to the `Todo` folder.
  - When you start a ticket, it's moved to the `Current` folder.
