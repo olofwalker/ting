@@ -28,19 +28,20 @@ import scala.util.{Try, Success, Failure}
 
 object CommandLine
 
+  val commands: (given RuntimeConfig) => List[Command] = List(
+    Command(Get,Ticket,"get ticket <id>", "Display a ticket",TicketOps.getTicket),
+    Command(Get,Tickets,"get ticket <todo | current | done> [-o]","Display list of tickets, optionally print the content of the ticket.",TicketOps.getTickets),
+    Command(Add,Ticket,"add ticket <title>","Adds a new ticket",TicketOps.addTicket),
+    Command(Start,Ticket,"start ticket <id>","Starts ticket progress by moving it from 'todo' to 'current'",TicketOps.startTicket),
+    Command(Edit,Ticket,"edit ticket <id>","Edit a ticket using the pre-configured editor.",TicketOps.editTicket),
+    Command(Complete,Ticket,"complete ticket <id>","Completes a ticket by moving it from 'current' to 'done'",TicketOps.completeTicket),
+    Command(Restart,Ticket,"restart ticket <id>","Restarts a ticket by moving it from 'done' to 'current'",TicketOps.restartTicket),
+    Command(Init,Project,"init project","Initialize a new project in the current folder.",ProjectOps.init)
+  )
+
+  
   def parseArguments(args: String*)(given config: RuntimeConfig) : CommandError | String =
 
-    def commands = List(
-      Command(Get,Ticket,"get ticket <id>", "Display a ticket",TicketOps.getTicket),
-      Command(Get,Tickets,"get ticket <todo | current | done> [-o]","Display list of tickets, optionally print the content of the ticket.",TicketOps.getTickets),
-      Command(Add,Ticket,"add ticket <title>","Adds a new ticket",TicketOps.addTicket),
-      Command(Start,Ticket,"start ticket <id>","Starts ticket progress by moving it from 'todo' to 'current'",TicketOps.startTicket),
-      Command(Edit,Ticket,"edit ticket <id>","Edit a ticket using the pre-configured editor.",TicketOps.editTicket),
-      Command(Complete,Ticket,"complete ticket <id>","Completes a ticket by moving it from 'current' to 'done'",TicketOps.completeTicket),
-      Command(Restart,Ticket,"restart ticket <id>","Restarts a ticket by moving it from 'done' to 'current'",TicketOps.restartTicket),
-      Command(Init,Project,"init project","Initialize a new project in the current folder.",ProjectOps.init)
-    )
-  
     lazy val helpText =  
       s"\nTing help:\n" ++
       commands.map(cmd => 
