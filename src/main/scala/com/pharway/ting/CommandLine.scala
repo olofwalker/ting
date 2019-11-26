@@ -39,6 +39,8 @@ object CommandLine
     Command(Init,Project,"init project","Initialize a new project in the current folder.",ProjectOps.init)
   )
 
+  private def synthesize(verb: String, subject: String): Try[(Verb, Subject)] = 
+    Try((Verb.valueOf(verb.capitalize), Subject.valueOf(subject.capitalize)))
   
   def parseArguments(args: String*)(given config: RuntimeConfig) : CommandError | String =
 
@@ -47,21 +49,29 @@ object CommandLine
       commands.map(cmd => 
         f"${cmd.syntax}%-45s - ${cmd.description}"
         ).mkString("\n")
-  
+
+    def find(verb: Verb, subject: Subject): Try[Command] = 
+      commands.find(_.compare(verb, subject)) match
+        case Some(command) => Success(command)
+        case None => Failure(Exception(s"$verb and $subject is not a recognized command"))
+      
     args.toList match 
       case verb :: subject :: options =>
-        val res = Try{commands
-            .find(_.compare(Verb.valueOf(verb.capitalize),Subject.valueOf(subject.capitalize)))}
-        res match 
-          case Success(cmd) => cmd match
-              case Some(x) => 
-                if x.verb != Init && x.subject != Project
-                  if(ProjectOps.validProject())
-                    x.func(options) 
-                  else
-                    CommandError("Not a valid project.")
-                else
-                  x.func(options)
-              case None => helpText
-          case Failure(ex) => helpText
+        val commandOrError: Try[Command] = 
+          for 
+            (v, s) <- synthesize(verb, subject)
+            command <- find(v, s)
+          yield 
+            command  
+          
+        commandOrError match 
+          case Success(cmd) =>
+            if cmd.verb != Init && cmd.subject != Project
+              if(ProjectOps.validProject())
+                cmd.func(options) 
+              else
+                CommandError("The current folder does not contain a valid project. You can initialize a project in this folder using the command `ting init project`.")
+            else
+              cmd.func(options)
+          case Failure(_) => helpText
       case _ => helpText
