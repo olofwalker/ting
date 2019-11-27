@@ -53,7 +53,7 @@ object CommandLine
     def find(verb: Verb, subject: Subject): Try[Command] = 
       commands.find(_.compare(verb, subject)) match
         case Some(command) => Success(command)
-        case None => Failure(Exception(s"$verb and $subject is not a recognized command"))
+        case None => Failure(Exception(s"'${verb.toString} ${subject.toString}' is not a recognized command"))
       
     args.toList match 
       case verb :: subject :: options =>
