@@ -19,8 +19,7 @@ package com.pharway.ting
 import verbs._
 import subjects._
 
-case class Command(verb: Verb, subject: Subject,syntax: String, description: String,func: (List[String]) => CommandError | String) {
+case class Command(verb: Verb, subject: Subject,syntax: String, description: String,func: (List[String]) => CommandError | String)
     def compare(verb: Verb, subject: Subject) = this.verb == verb && this.subject ==subject
-  }
 
 case class CommandError(msg: String)
