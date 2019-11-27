@@ -50,7 +50,7 @@ The configuration file currently contains the name of the editor used when editi
 ### Commands
 
 	get ticket <id>                               - Display a ticket
-	get tickets <todo | current | done> [-o]       - Display list of tickets, optionally print the content of the ticket.
+	get tickets <todo | current | done> [-o]      - Display list of tickets, optionally print the content of the ticket.
 	add ticket <title>                            - Adds a new ticket.
 	start ticket <id>                             - Starts ticket progress by moving it from 'todo' to 'current'
 	edit ticket <id>                              - Edit a ticket using the pre-configured editor.
