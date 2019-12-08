@@ -17,7 +17,13 @@ To start a Ting project, you first need to initialize the project. Initializing 
 
 `ting init project`
 
-A ticket template (default a YAML file packaged with Ting), located in the project directory, is used when creating new tickets. This template file (called `.template`) can be customized, by default it is a YAML file.
+A ticket template called `.template` (default a YAML file packaged with Ting), is written to the project directory when initializing, it is used when creating new tickets. This template file  can be customized, by default it contains the following YAML:
+
+```
+createdBy:
+assignedTo:
+description: >
+```
 
 To add your first ticket you:
 
@@ -35,8 +41,8 @@ Added ticket 'test'
 > ting get tickets todo
 0001 - test
 > ting get ticket 1
-createdBy: robert
-assignedTo: robert
+createdBy: someone
+assignedTo: someother
 description: > 
 This is a test ticket
 ```
