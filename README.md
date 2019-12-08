@@ -63,29 +63,7 @@ Here follows a summary of all `Ting` commands:
 	restart ticket <id>                           - Restarts a ticket by moving it from 'done' to 'current'
 	init project                                  - Initialize a new project in the current folder.
 
-## Ting configuration
-
-Ting stores a small configuration file the first time its executed. 
-The configuration path:
-
-    ~/.ting/config.yaml
-
-The configuration file currently contains the name of the editor used when editing tickets.
-
-## The name
-
-The name 'Ting' comes from an old Swedish/Scandinavian word for a meeting to resolve common issues.
-
-## Hacking
-
-Launch VS Code using Dotty LSP in the project directory.
-
-    sbt launchIDE
-
-More information about Dotty IDE support
-https://dotty.epfl.ch/docs/usage/ide-support.html
-
-## Building
+## Building Ting
 
 Ting is intended to be built using Graal native-image using [Graal 19.3](https://github.com/graalvm/graalvm-ce-builds/releases).
 
@@ -104,3 +82,25 @@ Generation of reflection configuration:
 `java -jar -agentlib:native-image-agent=config-output-dir=graal target/scala-0.20/ting-assembly-0.1.0.jar`
 
 3. Recompile the binary using `graalvm-native-image:packageBin`
+
+## Hacking Ting
+
+Launch VS Code using Dotty LSP in the project directory.
+
+    sbt launchIDE
+
+More information about Dotty IDE support
+https://dotty.epfl.ch/docs/usage/ide-support.html
+
+## Configuring Ting
+
+Ting stores a small configuration file the first time its executed. 
+The configuration path:
+
+    ~/.ting/config.yaml
+
+The configuration file currently contains the name of the editor used when editing tickets.
+
+## The name
+
+The name 'Ting' comes from an old Swedish/Scandinavian word for a meeting to resolve common issues.
