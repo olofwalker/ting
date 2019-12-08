@@ -26,3 +26,6 @@ lazy val root = project
     // To make the default compiler and REPL use Dotty
     scalaVersion := dottyVersion,
   )
+
+// disable javadoc generation in order to make sbt-native-packer faster
+mappings in (Compile, packageDoc) := Seq(),
