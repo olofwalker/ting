@@ -13,7 +13,7 @@ In Ting, a ticket is represented by a file; the file is located in one of three 
  - `.ting-project\Current` - Contains started tickets 
  - `.ting-project\Done` - Contains completed tickets
 
-To start a Ting project, you first need to initialize the project. Initializing creates a `.ting-project` folder in the current directory, just like Git.
+To start a Ting project, you first need to initialize a project. Initializing creates a `.ting-project` folder in the current directory.
 
 `ting init project`
 
@@ -30,7 +30,6 @@ To add your first ticket you:
 `ting add ticket my-first-ticket`
 
 Adding a ticket will create a file in the `TODO` folder using the above mentioned template and then open up your current selected editor to edit the file. The editor used can be configured in `~/.ting/config.yaml`.
-
 
 Each added ticket will have a filename with a unique id number prefixed to the selected ticket name. This id number is later used when referencing the ticket using other commands.
 
