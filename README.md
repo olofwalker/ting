@@ -13,9 +13,11 @@ In Ting, a ticket is represented by a file; the file is located in one of three 
  - `.ting-project\Current` - Contains started tickets 
  - `.ting-project\Done` - Contains completed tickets
 
-To start a Ting project, you first need to initialize a project. Initializing creates a `.ting-project` folder in the current directory.
+To start adding tickets, you first need to initialize a project. 
 
 `ting init project`
+
+Initializing creates the Ting folder structure in the current directory.
 
 A ticket template called `.template` (default a YAML file packaged with Ting), is written to the project directory when initializing, it is used when creating new tickets. This template file  can be customized, by default it contains the following YAML:
 
