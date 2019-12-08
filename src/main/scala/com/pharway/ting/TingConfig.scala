@@ -48,7 +48,7 @@ object ConfigFactory extends DefaultYamlProtocol
     if os.isFile(configDirectory / configFile) then
       Try(os.read(configDirectory / configFile).parseYaml.convertTo[Config]) match 
         case Failure(x) => 
-          "Unable to read configuration file, remove the configuration file and try again. Using default configuratoin.".logError
+          s"Unable to read configuration file `${(configDirectory / configFile).toString}`, remove the configuration file and try again. Using default configuration.".logError
           Config()
         case Success(c) => c
       
