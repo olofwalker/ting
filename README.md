@@ -1,4 +1,4 @@
-# Command-line driven ticket management in Scala 3
+# Command-line based ticket system written in Scala 3
 Ting is a small project I wrote to explore [Scala 3](https://github.com/lampepfl/dotty) features in combination with [GraalVM](https://www.graalvm.org) native image generation.
 
 I hope that this project can be helpful to anyone that wants to explore Scala 3 and Graal AOT.
