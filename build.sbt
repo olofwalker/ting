@@ -5,6 +5,7 @@ enablePlugins(GraalVMNativeImagePlugin)
 
 graalVMNativeImageOptions ++= Seq(
   "-H:ReflectionConfigurationFiles=" + baseDirectory.value / "graal" / "reflect-config.json",
+  "-H:ResourceConfigurationFiles=" + baseDirectory.value / "graal" / "resource-config.json",
   "--initialize-at-build-time",
   "--initialize-at-run-time=" +
     "com.typesafe.config.impl.ConfigImpl$EnvVariablesHolder," +
