@@ -9,11 +9,11 @@ Ting is a proof-of-concept, command-line driven, file-based, ticket management s
 
 The idea behind Ting is that a ticket is represented by a file, the file is located in one of three folders to describe it's current state. 
 
- - `.ting\Todo` - Contains new tickets
- - `.ting\Current` - Contains started tickets 
- - `.ting\Done` - Contains completed tickets
+ - `.ting-project\Todo` - Contains new tickets
+ - `.ting-project\Current` - Contains started tickets 
+ - `.ting-project\Done` - Contains completed tickets
 
-To start a Ting project, you first need to initialize the project. Initializing creates a `.ting` folder in the current directory, just like Git.
+To start a Ting project, you first need to initialize the project. Initializing creates a `.ting-project` folder in the current directory, just like Git.
 
 `ting init project`
 
