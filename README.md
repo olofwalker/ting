@@ -1,7 +1,7 @@
 # Command-line based ticket system written in Scala 3
 Ting is a small project I wrote to explore [Scala 3](https://github.com/lampepfl/dotty) features in combination with [GraalVM](https://www.graalvm.org) native image generation.
 
-I hope that this project can be helpful to anyone that wants to explore Scala 3 and Graal AOT.
+I hope that this project can be helpful to anyone that wants to explore Scala 3 and Graal AOT, and/or is looking for a simple way of organizing their work.
 
 ## Introduction
 
@@ -85,7 +85,9 @@ Launch VS Code using Dotty LSP in the project directory.
 More information about Dotty IDE support
 https://dotty.epfl.ch/docs/usage/ide-support.html
 
-Ting is intended to be built using Graal native-image using Graal 19.3.
+## Building
+
+Ting is intended to be built using Graal native-image using [Graal 19.3](https://github.com/graalvm/graalvm-ce-builds/releases).
 
     graalvm-native-image:packageBin
 
