@@ -25,7 +25,7 @@ case class Ticket(state: TicketState,id: Int, path: Path)
 
 
 object Ticket
-  val directory = RelPath(".ting")
+  val directory = RelPath(".ting-project")
   def apply(state: TicketState, path: Path) : Ticket = 
     val id = path.last.take(path.last.indexOf("-") - 1).trim.toInt
     Ticket(state,id,path)

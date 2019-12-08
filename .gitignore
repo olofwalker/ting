@@ -6,6 +6,7 @@
 .vscode
 .ting
 .dotty*
+_site
 
 target
 project

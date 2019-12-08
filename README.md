@@ -5,17 +5,19 @@ I hope that this project can be helpful to anyone that wants to explore Scala 3 
 
 ## Introduction
 
-Ting is a command-line driven, file-based, ticket management system. 
+Ting is a proof-of-concept, command-line driven, file-based, ticket management system. 
 
-A Ting project is initialized in the current folder. It creates a base folder (`.ting`) and three sub-folders, one for each of the available ticket states.
+The idea behind Ting is that a ticket is represented by a file, the file is located in one of three folders to describe it's current state. 
 
- - When you add a new ticket, it's added to the `Todo` folder.
- - When you start a ticket, it's moved to the `Current` folder.
- - When you complete a ticket, it's moved to the `Done` folder.
+ - `.ting\Todo` - Contains new tickets
+ - `.ting\Current` - Contains started tickets 
+ - `.ting\Done` - Contains completed tickets
 
-A ticket template (default a YAML file packaged with Ting) is added to each tickets created.
+To start a Ting project, you first need to initialize the project. Initializing creates a `.ting` folder in the current directory, just like Git.
 
-If you want to use a different YAML template file, replace the `.template` file in the `.ting` base folder.
+`ting init project`
+
+A ticket template (default a YAML file packaged with Ting), located in the project directory, is used when creating new tickets. This template file (called `.template`) can be customized, by default it is a YAML file.
 
 ## The name
 
@@ -35,6 +37,18 @@ Ting is intended to be built using Graal native-image using Graal 19.3.
     graalvm-native-image:packageBin
 
 The output is located in `./target/graalvm-native-image/ting`
+
+Some parts of Ting uses reflection, for example, serialization of the configuration, if this part of the program is changed, chances are that you have to re-generate the reflection configuration used by `native-image` while compiling.
+
+Generation of reflection configuration:
+
+1. First build a fat jar using `assembly`
+
+2. Run the tracing agent:
+
+`java -jar -agentlib:native-image-agent=config-output-dir=graal target/scala-0.20/ting-assembly-0.1.0.jar`
+
+3. Recompile the binary using `graalvm-native-image:packageBin`
 
 ## Using Ting
 

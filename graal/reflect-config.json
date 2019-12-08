@@ -1,0 +1,24 @@
+[
+{
+  "name":"com.pharway.ting.Config",
+  "allDeclaredFields":true,
+  "allPublicMethods":true
+},
+{
+  "name":"com.pharway.ting.ConfigFactory$",
+  "fields":[{"name":"bitmap$0", "allowUnsafeAccess":true}]
+},
+{
+  "name":"java.lang.invoke.VarHandle"
+},
+{
+  "name":"java.sql.Date"
+},
+{
+  "name":"java.sql.Timestamp"
+},
+{
+  "name":"sun.misc.Unsafe",
+  "allDeclaredFields":true
+}
+]

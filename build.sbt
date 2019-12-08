@@ -4,12 +4,14 @@ val scala212Version = "2.13.1"
 enablePlugins(GraalVMNativeImagePlugin)
 
 graalVMNativeImageOptions ++= Seq(
+  "-H:ReflectionConfigurationFiles=" + baseDirectory.value / "graal" / "reflect-config.json",
   "--initialize-at-build-time",
   "--initialize-at-run-time=" +
     "com.typesafe.config.impl.ConfigImpl$EnvVariablesHolder," +
     "com.typesafe.config.impl.ConfigImpl$SystemPropertiesHolder",
   "--no-fallback",
-  "--static"
+  "--static",
+  "--allow-incomplete-classpath"
 )
 
 lazy val root = project
@@ -21,5 +23,5 @@ lazy val root = project
     libraryDependencies += "net.jcazevedo" % "moultingyaml_2.13" % "0.4.1",
     libraryDependencies += "com.lihaoyi" % "os-lib_2.13" % "0.3.0",
     // To make the default compiler and REPL use Dotty
-    scalaVersion := dottyVersion
+    scalaVersion := dottyVersion,
   )
