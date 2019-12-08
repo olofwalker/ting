@@ -1,5 +1,5 @@
 # Command-line driven ticket management in Scala 3
-Ting is a small project I wrote to explore Scala 3 features in combination with GraalVM native image generation.
+Ting is a small project I wrote to explore [Scala 3](https://github.com/lampepfl/dotty) features in combination with [GraalVM](https://www.graalvm.org) native image generation.
 
 I hope that this project can be helpful to anyone that wants to explore Scala 3 and Graal AOT.
 
@@ -7,19 +7,23 @@ I hope that this project can be helpful to anyone that wants to explore Scala 3 
 
 Ting is a proof-of-concept, command-line driven, file-based, ticket management system. 
 
-In Ting, a ticket is represented by a file; the file is located in one of three folders to describe it's current state. 
-
- - `.ting-project\Todo` - Contains new tickets
- - `.ting-project\Current` - Contains started tickets 
- - `.ting-project\Done` - Contains completed tickets
-
-To start adding tickets, you first need to initialize a project. 
+Before you can add any tickets, you first need to initialize a project. 
 
 `ting init project`
 
-Initializing creates the Ting folder structure in the current directory.
+Initializing creates the Ting directory structure in the current directory, the project directory is called `.ting-project`.
 
-A ticket template called `.template` (default a YAML file packaged with Ting), is written to the project directory when initializing, it is used when creating new tickets. This template file  can be customized, by default it contains the following YAML:
+```
+ls .ting-project 
+drwxr-xr-x 2 user user 4,0K dec  8 11:02 current
+drwxr-xr-x 2 user user 4,0K dec  8 11:02 done
+-rw-r--r-- 1 user user   59 dec  8 11:02 .template
+drwxr-xr-x 2 user user 4,0K dec  8 11:02 todo
+```
+
+Each of the sub-directories in the project directory defines a ticket state, the ticket file will be placed in the `todo` directory when created. When starting a ticket, the ticket file will be moved from `todo` to `current`, when resolving a ticket it will be moved from `current` to `done`.
+
+A ticket template called `.template`, is also written to the project directory when initializing, it is used when creating new tickets. This template file  can be customized, by default it contains the following YAML:
 
 ```
 createdBy:
@@ -31,7 +35,7 @@ To add your first ticket you:
 
 `ting add ticket my-first-ticket`
 
-Adding a ticket will create a file in the `TODO` folder using the above mentioned template and then open up your current selected editor to edit the file. The editor used can be configured in `~/.ting/config.yaml`.
+Adding a ticket will create a file in the `todo` directory using the above mentioned template and then open up your current selected editor to edit the file. The editor used can be configured in `~/.ting/config.yaml`.
 
 Each added ticket will have a filename with a unique id number prefixed to the selected ticket name. This id number is later used when referencing the ticket using other commands.
 
