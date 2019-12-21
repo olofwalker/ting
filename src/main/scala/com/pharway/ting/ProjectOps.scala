@@ -20,8 +20,6 @@ package com.pharway.ting
 import os._
 import scala.util._
 
-import ticketStateOps._
-
 object ProjectOps 
   def validProject()(given config: RuntimeConfig): Boolean =
     Try(

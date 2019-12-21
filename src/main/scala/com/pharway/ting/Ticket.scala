@@ -39,8 +39,4 @@ def (list: List[Ticket]) filterByState(state: TicketState) : List[Ticket] =
 
 enum TicketState
   case Todo,Current,Done
-
-given ticketStateOps: with
-  def (state: TicketState) toPath =
-    Ticket.directory / RelPath(state.toString.toLowerCase)
-
+  def toPath = Ticket.directory / RelPath(this.toString.toLowerCase)
