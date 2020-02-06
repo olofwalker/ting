@@ -1,4 +1,4 @@
-val dottyVersion = "0.21.0-RC1"
+val dottyVersion = "0.22.0-RC1"
 val scala212Version = "2.13.1"
 
 enablePlugins(GraalVMNativeImagePlugin)
