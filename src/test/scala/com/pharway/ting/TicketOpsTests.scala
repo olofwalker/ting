@@ -39,7 +39,7 @@ class TicketOpsTests {
 
   import TicketOpsTests._
 
-  given config : RuntimeConfig = RuntimeConfig(tempDirectory,"")
+  given config as RuntimeConfig = RuntimeConfig(tempDirectory,"")
 
   @Before def beforeEach() : Unit = {
     CommandLine.parseArguments("init", "project")

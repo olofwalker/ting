@@ -20,8 +20,8 @@ package com.pharway.ting
 import os._
 import scala.util._
 
-object ProjectOps 
-  def validProject()(given config: RuntimeConfig): Boolean =
+object ProjectOps:
+  def validProject()(using config: RuntimeConfig): Boolean =
     Try(
       TicketState.values.map(_.toPath)
       .map(dir => os.isDir(config.baseDirectory / dir))      
@@ -31,7 +31,7 @@ object ProjectOps
       case Success(b) => b
       case Failure(_) => false
       
-  def init(options: List[String])(given config: RuntimeConfig): String | CommandError =
+  def init(options: List[String])(using config: RuntimeConfig): String | CommandError =
     if validProject() then
       CommandError(s"There is already a project in the current path!")
     else 

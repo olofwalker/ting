@@ -18,5 +18,5 @@
 package com.pharway.ting
 package verbs
 
-enum Verb
+enum Verb:
     case Init,Get,Edit,Add,Start,Complete,Restart

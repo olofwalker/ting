@@ -18,6 +18,5 @@
 package com.pharway.ting
 package subjects
 
-enum Subject 
+enum Subject:
     case Tickets,Projects,Ticket,Project
-

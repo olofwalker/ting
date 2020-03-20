@@ -26,9 +26,8 @@ import net.jcazevedo.moultingyaml.DefaultYamlProtocol._
 
 case class Config(ticketEditor: String = "xdg-open")
 
-object ConfigFactory extends DefaultYamlProtocol 
-
-  given f: YamlFormat[Config] = yamlFormat1(Config)
+object ConfigFactory extends DefaultYamlProtocol:
+  given YamlFormat[Config] = yamlFormat1(Config)
 
   final case class ConfigurationNotFound(message: String = "") extends Exception(message)
 
@@ -55,10 +54,10 @@ object ConfigFactory extends DefaultYamlProtocol
     else
       throw new ConfigurationNotFound("This is not a Ting project.")
 
-case class RuntimeConfig(baseDirectory: Path, ticketEditor: String) 
+case class RuntimeConfig(baseDirectory: Path, ticketEditor: String):
   val editTicket = ticketEditor.nonEmpty
 
-object RuntimeConfig 
+object RuntimeConfig:
   def apply(config: Config) : RuntimeConfig = RuntimeConfig(Path(System.getProperty("user.dir")),config)
   def apply(baseDirectory: Path, config: Config) : RuntimeConfig = RuntimeConfig(baseDirectory,config.ticketEditor)
 

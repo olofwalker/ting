@@ -26,9 +26,8 @@ import subjects.Subject._
 import scala.util.{Try, Success, Failure}
 
 
-object CommandLine
-
-  val commands: (given RuntimeConfig) => List[Command] = List(
+object CommandLine:
+  def commands()(using RuntimeConfig) : List[Command] = List(
     Command(Get,Ticket,"get ticket <id>", "Display a ticket",TicketOps.getTicket),
     Command(Get,Tickets,"get ticket <todo | current | done> [-o]","Display list of tickets, optionally print the content of the ticket.",TicketOps.getTickets),
     Command(Add,Ticket,"add ticket <title>","Adds a new ticket",TicketOps.addTicket),
@@ -42,16 +41,16 @@ object CommandLine
   private def synthesize(verb: String, subject: String): Try[(Verb, Subject)] = 
     Try((Verb.valueOf(verb.capitalize), Subject.valueOf(subject.capitalize)))
   
-  def parseArguments(args: String*)(given config: RuntimeConfig) : CommandError | String =
+  def parseArguments(args: String*)(using config: RuntimeConfig) : CommandError | String =
 
     lazy val helpText =  
       s"\nTing help:\n" ++
-      commands.map(cmd => 
+      commands().map(cmd => 
         f"${cmd.syntax}%-45s - ${cmd.description}"
         ).mkString("\n")
 
     def find(verb: Verb, subject: Subject): Try[Command] = 
-      commands.find(_.compare(verb, subject)) match
+      commands().find(_.compare(verb, subject)) match
         case Some(command) => Success(command)
         case None => Failure(Exception(s"'${verb.toString} ${subject.toString}' is not a recognized command"))
       

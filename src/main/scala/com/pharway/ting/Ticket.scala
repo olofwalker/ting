@@ -19,12 +19,12 @@ package com.pharway.ting
 
 import os._
 
-case class Ticket(state: TicketState,id: Int, path: Path)
+case class Ticket(state: TicketState,id: Int, path: Path):
   val fileName = RelPath(path.last)
   val name = fileName.toString.takeRight(fileName.toString.length - fileName.toString.indexOf("-") - 1).trim
 
 
-object Ticket
+object Ticket:
   val directory = RelPath(".ting-project")
   def apply(state: TicketState, path: Path) : Ticket = 
     val id = path.last.take(path.last.indexOf("-") - 1).trim.toInt
@@ -37,6 +37,6 @@ def (list: List[Ticket]) filterByState(state: TicketState) : List[Ticket] =
   list.filter(_.state == state)  
 
 
-enum TicketState
+enum TicketState:
   case Todo,Current,Done
   def toPath = Ticket.directory / RelPath(this.toString.toLowerCase)

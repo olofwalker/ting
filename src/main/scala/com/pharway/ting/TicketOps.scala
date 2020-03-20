@@ -28,9 +28,8 @@ import scala.util._
 
 import TicketState._
 
-object TicketOps
-  
-  def getTickets(options: List[String])(given config: RuntimeConfig): CommandError | String =
+object TicketOps:
+  def getTickets(options: List[String])(using config: RuntimeConfig): CommandError | String =
     Try(getCommandLineStateAndFlags(options)) match
     case Failure(err) => CommandError(err.getMessage)
     case Success(ticketState) =>
@@ -43,7 +42,7 @@ object TicketOps
             case nil =>
               tickets.filterByState(ticketState._1).map(ticket => ticket.fileName).mkString("\n")
   
-  def getTicket(options: List[String])(given config: RuntimeConfig): CommandError | String =
+  def getTicket(options: List[String])(using config: RuntimeConfig): CommandError | String =
     options match 
       case Nil => CommandError("Missing ticket id")
       case ticketId :: tail => 
@@ -54,7 +53,7 @@ object TicketOps
               case Some(x) => os.read(x.path)
           case c: CommandError => c
 
-  def addTicket(options: List[String])(given config: RuntimeConfig): CommandError | String =
+  def addTicket(options: List[String])(using config: RuntimeConfig): CommandError | String =
     options match
       case Nil =>
         CommandError("no ticket name specified.")
@@ -78,7 +77,7 @@ object TicketOps
                   Process(config.ticketEditor, Seq(ticketPath.toString())).run().exitValue()
                 s"Added ticket '$ticketName'"
                   
-  def editTicket(options: List[String])(given config: RuntimeConfig): CommandError | String =
+  def editTicket(options: List[String])(using config: RuntimeConfig): CommandError | String =
     options match 
       case Nil => CommandError("Missing ticket id")
       case ticketId :: tail => 
@@ -94,13 +93,13 @@ object TicketOps
                     CommandError(s"Failed to open file ${ticket.path.toString()}, exit code $failure.")                    
           case c: CommandError => c
 
-  def startTicket(options: List[String])(given config: RuntimeConfig) : CommandError | String = 
+  def startTicket(options: List[String])(using config: RuntimeConfig) : CommandError | String = 
     moveTicket(options,Todo,Current)
 
-  def completeTicket(options: List[String])(given config: RuntimeConfig) : CommandError | String = 
+  def completeTicket(options: List[String])(using config: RuntimeConfig) : CommandError | String = 
     moveTicket(options,Current,Done)
     
-  def restartTicket(options: List[String])(given config: RuntimeConfig) : CommandError | String = 
+  def restartTicket(options: List[String])(using config: RuntimeConfig) : CommandError | String = 
     moveTicket(options,Done,Current)
 
 
@@ -112,7 +111,7 @@ object TicketOps
           case Failure(f) => throw Exception(s"Please provide a valid state, '$state' is not a recognized state.")
       case _ => throw Exception(s"Please provide a valid state.")
         
-  private def moveTicket(options: List[String], from: TicketState, to: TicketState)(given config: RuntimeConfig) : String | CommandError =
+  private def moveTicket(options: List[String], from: TicketState, to: TicketState)(using config: RuntimeConfig) : String | CommandError =
     options match 
       case Nil => CommandError("Missing ticket id")
       case ticketId :: tail => 
@@ -125,10 +124,10 @@ object TicketOps
                 s"Moved ticket ${ticketId.toInt} to $to"
           case c: CommandError => c    
   
-  private def ticketCount(given config: RuntimeConfig): Int =
+  private def ticketCount(using config: RuntimeConfig): Int =
     TicketState.values.map(state => os.list(config.baseDirectory / state.toPath).filter(os.isFile).size).sum
 
-  private def readTickets()(given config: RuntimeConfig): CommandError | List[Ticket] =
+  private def readTickets()(using config: RuntimeConfig): CommandError | List[Ticket] =
     Try(TicketState.values.flatMap( state => 
         os.list(config.baseDirectory / state.toPath)
           .filter(os.isFile)
