@@ -65,7 +65,7 @@ Here follows a summary of all `Ting` commands:
 
 ## Building Ting
 
-Ting is intended to be built using Graal native-image using [Graal 19.3](https://github.com/graalvm/graalvm-ce-builds/releases).
+Ting is intended to be built using Graal native-image using [Graal 19.3.1](https://github.com/graalvm/graalvm-ce-builds/releases).
 
     graalvm-native-image:packageBin
 
