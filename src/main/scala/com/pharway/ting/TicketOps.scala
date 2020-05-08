@@ -44,14 +44,15 @@ object TicketOps:
   
   def getTicket(options: List[String])(using config: RuntimeConfig): CommandError | String =
     options match 
-      case Nil => CommandError("Missing ticket id")
-      case ticketId :: tail => 
+      case ticketId :: tail if ticketId.matches("\\d+") => 
         readTickets() match 
           case tickets: List[Ticket] => 
             tickets.findByTicketId(ticketId.toInt) match 
               case None => CommandError(s"Ticket with id '$ticketId' not found.")
               case Some(x) => os.read(x.path)
           case c: CommandError => c
+      case Nil => CommandError("Missing ticket id")
+      case _ => CommandError("Invalid ticket id")
 
   def addTicket(options: List[String])(using config: RuntimeConfig): CommandError | String =
     options match
@@ -79,8 +80,7 @@ object TicketOps:
                   
   def editTicket(options: List[String])(using config: RuntimeConfig): CommandError | String =
     options match 
-      case Nil => CommandError("Missing ticket id")
-      case ticketId :: tail => 
+      case ticketId :: tail if ticketId.matches("\\d+") => 
         readTickets() match 
           case tickets: List[Ticket] => 
             tickets.findByTicketId(ticketId.toInt) match 
@@ -92,6 +92,8 @@ object TicketOps:
                   case failure =>
                     CommandError(s"Failed to open file ${ticket.path.toString()}, exit code $failure.")                    
           case c: CommandError => c
+      case Nil => CommandError("Missing ticket id")
+      case _ => CommandError("Invalid ticket id")
 
   def startTicket(options: List[String])(using config: RuntimeConfig) : CommandError | String = 
     moveTicket(options,Todo,Current)
