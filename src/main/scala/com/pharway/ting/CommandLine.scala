@@ -29,7 +29,7 @@ import scala.util.{Try, Success, Failure}
 object CommandLine:
   def commands()(using RuntimeConfig) : List[Command] = List(
     Command(Get,Ticket,"get ticket <id>", "Display a ticket",TicketOps.getTicket),
-    Command(Get,Tickets,"get ticket <todo | current | done> [-o]","Display list of tickets, optionally print the content of the ticket.",TicketOps.getTickets),
+    Command(Get,Tickets,"get tickets <todo | current | done> [-o]","Display list of tickets, optionally print the content of the ticket.",TicketOps.getTickets),
     Command(Add,Ticket,"add ticket <title>","Adds a new ticket",TicketOps.addTicket),
     Command(Start,Ticket,"start ticket <id>","Starts ticket progress by moving it from 'todo' to 'current'",TicketOps.startTicket),
     Command(Edit,Ticket,"edit ticket <id>","Edit a ticket using the pre-configured editor.",TicketOps.editTicket),
