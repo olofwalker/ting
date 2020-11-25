@@ -41,7 +41,9 @@ object CommandLine:
   private def synthesize(verb: String, subject: String): Try[(Verb, Subject)] = 
     Try((Verb.valueOf(verb.capitalize), Subject.valueOf(subject.capitalize)))
   
-  def parseArguments(args: String*)(using config: RuntimeConfig) : CommandError | String =
+  type ExecutableCommand = RuntimeConfig ?=> CommandError | String //Context Function
+
+  def parseArguments(args: String*): ExecutableCommand =
 
     lazy val helpText =  
       s"\nTing help:\n" ++
