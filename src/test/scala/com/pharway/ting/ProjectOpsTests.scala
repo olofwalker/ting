@@ -39,7 +39,7 @@ class ProjectOpsTests {
 
   import ProjectOpsTests._
 
-  given config as RuntimeConfig = RuntimeConfig(tempDirectory,"")
+  given config: RuntimeConfig = RuntimeConfig(tempDirectory,"")
 
   @After def afterEach() = {
     os.remove.all(tempDirectory / Ticket.directory)

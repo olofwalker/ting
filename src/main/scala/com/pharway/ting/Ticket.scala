@@ -31,9 +31,10 @@ object Ticket:
     Ticket(state,id,path)
   val templateFile = ".template"
 
-def (list: List[Ticket]) findByTicketId(id: Int) : Option[Ticket] = 
-    list.find(_.id == id)
-def (list: List[Ticket]) filterByState(state: TicketState) : List[Ticket] = 
+extension (list: List[Ticket])
+  def findByTicketId(id: Int) : Option[Ticket] = 
+      list.find(_.id == id)
+  def  filterByState(state: TicketState) : List[Ticket] = 
   list.filter(_.state == state)  
 
 

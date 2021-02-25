@@ -67,8 +67,8 @@ object CommandLine:
           
         commandOrError match 
           case Success(cmd) =>
-            if cmd.verb != Init && cmd.subject != Project
-              if(ProjectOps.validProject())
+            if cmd.verb != Init && cmd.subject != Project then
+              if(ProjectOps.validProject()) then
                 cmd.func(options) 
               else
                 CommandError("The current folder does not contain a valid project. You can initialize a project in this folder using the command `ting init project`.")

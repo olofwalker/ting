@@ -19,6 +19,9 @@ package com.pharway.ting
 
 import Console._
 
-def (error: CommandError) logError: Unit = println(s"${RED}[Error]${RESET} ${error.msg}")
-def (error: String) logError: Unit = println(s"${RED}[Error]${RESET} ${error}")
-def (info: String) logInfo: Unit = println(info)
+extension (str: String)
+    def logError: Unit = println(s"${RED}[Error]${RESET} ${str}")
+    def logInfo: Unit = println(str)
+
+extension (error: CommandError)
+    def logError: Unit = println(s"${RED}[Error]${RESET} ${error.msg}")

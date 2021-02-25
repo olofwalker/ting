@@ -19,7 +19,7 @@ package com.pharway.ting
 
 @main def ting(args: String*) =
 
-  given config as RuntimeConfig = RuntimeConfig(ConfigFactory.init)
+  given config: RuntimeConfig = RuntimeConfig(ConfigFactory.init)
 
   CommandLine.parseArguments(args:_*) match
        case e: CommandError => e.logError

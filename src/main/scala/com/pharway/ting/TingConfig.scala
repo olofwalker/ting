@@ -27,7 +27,7 @@ import net.jcazevedo.moultingyaml.DefaultYamlProtocol._
 case class Config(ticketEditor: String = "xdg-open")
 
 object ConfigFactory extends DefaultYamlProtocol:
-  given YamlFormat[Config] = yamlFormat1(Config)
+  given YamlFormat[Config] = yamlFormat1(Config.apply)
 
   final case class ConfigurationNotFound(message: String = "") extends Exception(message)
 
