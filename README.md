@@ -65,29 +65,21 @@ Here follows a summary of all `Ting` commands:
 
 ## Building Ting
 
-Ting is intended to be built using Graal native-image using [Graal 19.3.1](https://github.com/graalvm/graalvm-ce-builds/releases/tag/vm-19.3.1) and OpenJDK 11.0.5.
+Ting is intended to be built using Graal native-image using Graal 21.1.0, the easiest way of installing Graal is using [SDKMAN](https://sdkman.io) 
 
-    graalvm-native-image:packageBin
+After installing Graal, you need to install `native-image` using the Graal package manager `gu`.
 
-The output is located in `./target/graalvm-native-image/ting`
+	gu install native-image
 
-Some parts of Ting uses reflection, for example, serialization of the configuration, if this part of the program is changed, chances are that you have to re-generate the reflection configuration used by `native-image` while compiling.
+Once installed, build the project the following way.
 
-Generation of reflection configuration:
+    sbt graalvm-native-image:packageBin
 
-1. First build a fat jar using `assembly`
-
-2. Run the tracing agent:
-
-`java -jar -agentlib:native-image-agent=config-output-dir=graal target/scala-0.20/ting-assembly-0.1.0.jar`
-
-3. Recompile the binary using `graalvm-native-image:packageBin`
+Once the build succeeds, the executable is located in `./target/graalvm-native-image/ting`
 
 ## Hacking Ting
 
-Launch VS Code using Dotty LSP in the project directory.
-
-    sbt launchIDE
+There are several IDE options for Scala 3, Visual Studio Code and Intellij IDEA being the most popular.
 
 More information about Dotty IDE support
 https://dotty.epfl.ch/docs/usage/ide-support.html

@@ -1,4 +1,4 @@
-val dottyVersion = "3.0.0-RC2"
+val dottyVersion = "3.0.0-RC3"
 
 enablePlugins(GraalVMNativeImagePlugin)
 
@@ -11,7 +11,8 @@ graalVMNativeImageOptions ++= Seq(
     "com.typesafe.config.impl.ConfigImpl$SystemPropertiesHolder",
   "--no-fallback",
   "--static",
-  "--allow-incomplete-classpath"
+  "--allow-incomplete-classpath",
+  "--report-unsupported-elements-at-runtime"
 )
 
 lazy val root = project
@@ -19,12 +20,10 @@ lazy val root = project
   .settings(
     name := "ting",
     version := "0.1.0",
+
     libraryDependencies += "com.novocode" % "junit-interface" % "0.11" % "test",
     libraryDependencies += "net.jcazevedo" % "moultingyaml_2.13" % "0.4.1",
     libraryDependencies += "com.lihaoyi" % "os-lib_2.13" % "0.3.0",
     // To make the default compiler and REPL use Dotty
     scalaVersion := dottyVersion,
   )
-
-// disable javadoc generation in order to make sbt-native-packer faster
-mappings in (Compile, packageDoc) := Seq(),
